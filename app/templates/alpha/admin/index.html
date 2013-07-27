@@ -1,0 +1,48 @@
+{render "admin/index.php"}
+
+{if $request.action == "upload"}
+	{return}
+{/if}
+
+<script type="text/javascript">
+
+	// Prefix all relative URLs with /admin.
+	function url_needs_prefix (url)
+	{
+		if (url && url.indexOf('/') == 0 && url.indexOf('/admin') == -1)
+		{
+			url = '/admin'+url;
+		}
+		return url;
+	}
+	$('a').each(function ()
+	{
+		var url = this.getAttribute('href');
+		this.href = url_needs_prefix(url);
+	});
+	$('form').each(function ()
+	{
+		var url = this.getAttribute('action');
+		this.action = url_needs_prefix(url);
+	});
+	$('#search').each(function ()
+	{
+		this.action = '/admin';
+	});
+	$('#list, #info').each(function ()
+	{
+		var url = $(this).data('url');
+		$(this).data('url', url_needs_prefix(url));
+	});
+	$('.field .image').each(function ()
+	{
+		var url = $(this).data('upload');
+		$(this).data('upload', url_needs_prefix(url));
+	});
+	$('.view-link, button').each(function ()
+	{
+		var url = $(this).data('href');
+		$(this).data('href', url_needs_prefix(url));
+	});
+
+</script>

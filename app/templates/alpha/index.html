@@ -1,0 +1,23 @@
+{extend "session"}
+
+{* Get latest products *}
+{$featured_products = "/products"|get:[
+	is_active => true,
+	limit => 8
+]}
+
+<div class="content-banner">
+	<!-- Creatuve banner content goes here -->
+</div>
+<div style="margin:auto">
+				<iframe style="width:100%;height:1100px;border:0px"  src="http://solitaires.jewelskart.com/widget.php"></iframe>
+
+</div>
+<div class="category-list">
+	
+	{* Render featured products *}
+	{render "product-list" with=$featured_products}
+
+
+</div>
+
